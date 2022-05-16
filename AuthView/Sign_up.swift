@@ -5,13 +5,24 @@ struct SignUpView: View
     @State private var email: String = ""
     @State private var username: String = ""
     @State private var password: String = ""
-    @State private var rePassword: String = ""
+    
+    @Environment(\.presentationMode) var presentationMode
         
     var body: some View
     {
         ZStack
         {
             AnimatedGradient(colors: [Color("blue"), Color("pink"), Color("purple")])
+            
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }, label: {
+                Text("Dismiss")
+                    .foregroundColor(.secondary)
+            })
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+            .padding(20)
+            
             VStack(spacing: 20)
             {
                 Text("Sign Up")
@@ -19,14 +30,20 @@ struct SignUpView: View
                     .font(.title)
                     .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                
                 TextField("Enter E-mail", text: $email)
                     .modifier(GlassItem())
-                SecureField("Enter password", text: $password)
-                    .modifier(GlassItem())
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
+                
+                SecureTextField(text: $password)
+                
                 Divider()
+                
                 Text("By signing up you accept the **Terms of Service** and **Privacy Policy**")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(.secondary)
+                
                 Button
                 {
                     print("Button")
@@ -38,10 +55,11 @@ struct SignUpView: View
                         Text("Sign up")
                             .foregroundColor(.secondary)
                             .fontWeight(.semibold)
-                    }.padding()
-                        .background(.ultraThinMaterial)
-                        .foregroundStyle(.ultraThinMaterial)
-                        .cornerRadius(20)
+                    }
+                    .padding()
+                    .background(.ultraThinMaterial)
+                    .foregroundStyle(.ultraThinMaterial)
+                    .cornerRadius(20)
                 }
             }
             .padding()

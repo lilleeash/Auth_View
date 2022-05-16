@@ -32,6 +32,7 @@ struct CustomTextField: View
         TextField("Enter username", text: $username)
             .frame(height: 50)
             .modifier(GlassItem())
+            .foregroundColor(.secondary)
     }
 }
 
@@ -51,6 +52,37 @@ struct PrimaryButton: View
                 .fontWeight(.semibold)
                 .foregroundColor(colorScheme == .dark ? .white : .black)
         }.padding()
+    }
+}
+
+struct SecureTextField: View {
+    
+    @State private var isSecure: Bool = true
+    @Binding var text: String
+
+    var body: some View {
+        HStack {
+            if isSecure {
+                
+                SecureField("Enter your password", text: $text)
+                    .modifier(GlassItem())
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
+                
+            } else {
+                
+                TextField(text, text: $text)
+                    .modifier(GlassItem())
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
+            }
+        }.overlay(alignment: .trailing) {
+            Image(systemName: isSecure ? "eye.slash" : "eye")
+                .padding(.trailing, 8)
+                .onTapGesture {
+                    isSecure.toggle()
+                }
+        }
     }
 }
 
