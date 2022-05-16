@@ -1,20 +1,16 @@
 import SwiftUI
 
-struct SignInView: View
-{
+struct SignInView: View {
     @State private var email: String = ""
     @State private var username: String = ""
     @State private var password: String = ""
     @State private var isShowingSheet = false
     
-    var body: some View 
-    {
-        ZStack
-        {
+    var body: some View  {
+        ZStack {
             AnimatedGradient(colors: [Color("blue"), Color("pink"), Color("purple")])
             
-            VStack(spacing: 20)
-            {
+            VStack(spacing: 20) {
                 Text("Sign In")
                     .fontWeight(.bold)
                     .font(.title)
@@ -22,9 +18,7 @@ struct SignInView: View
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 TextField("Enter E-mail", text: $email)
-                    .modifier(GlassItem())
-                    .disableAutocorrection(true)
-                    .autocapitalization(.none)
+                    .textFieldStyle(CustomTextFieldStyle())
                 
                 SecureTextField(text: $password)
                 
@@ -35,8 +29,7 @@ struct SignInView: View
                 
                 Divider()
                 
-                HStack
-                {
+                HStack {
                     Text("If you don't have an accont")
                     
                     Button {
@@ -52,14 +45,12 @@ struct SignInView: View
                 }
                 .frame(maxWidth: .infinity, alignment: .topLeading)
 
-                Button
-                {
+                Button {
                     print("Button")
                 }
                     label:
                 {
-                   ZStack
-                    {
+                   ZStack {
                         Text("Sign In")
                             .foregroundColor(.secondary)
                             .fontWeight(.semibold)

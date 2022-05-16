@@ -55,6 +55,7 @@ struct PrimaryButton: View
     }
 }
 
+//  Show/Hide password
 struct SecureTextField: View {
     
     @State private var isSecure: Bool = true
@@ -65,19 +66,16 @@ struct SecureTextField: View {
             if isSecure {
                 
                 SecureField("Enter your password", text: $text)
-                    .modifier(GlassItem())
-                    .disableAutocorrection(true)
-                    .autocapitalization(.none)
+                    .textFieldStyle(CustomTextFieldStyle())
                 
             } else {
                 
                 TextField(text, text: $text)
-                    .modifier(GlassItem())
-                    .disableAutocorrection(true)
-                    .autocapitalization(.none)
+                    .textFieldStyle(CustomTextFieldStyle())
             }
         }.overlay(alignment: .trailing) {
             Image(systemName: isSecure ? "eye.slash" : "eye")
+                .foregroundColor(.secondary)
                 .padding(.trailing, 8)
                 .onTapGesture {
                     isSecure.toggle()

@@ -1,17 +1,14 @@
 import SwiftUI
 
-struct SignUpView: View
-{
+struct SignUpView: View {
     @State private var email: String = ""
     @State private var username: String = ""
     @State private var password: String = ""
     
     @Environment(\.presentationMode) var presentationMode
         
-    var body: some View
-    {
-        ZStack
-        {
+    var body: some View {
+        ZStack {
             AnimatedGradient(colors: [Color("blue"), Color("pink"), Color("purple")])
             
             Button(action: {
@@ -23,8 +20,7 @@ struct SignUpView: View
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             .padding(20)
             
-            VStack(spacing: 20)
-            {
+            VStack(spacing: 20) {
                 Text("Sign Up")
                     .fontWeight(.bold)
                     .font(.title)
@@ -32,9 +28,7 @@ struct SignUpView: View
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 TextField("Enter E-mail", text: $email)
-                    .modifier(GlassItem())
-                    .disableAutocorrection(true)
-                    .autocapitalization(.none)
+                    .textFieldStyle(CustomTextFieldStyle())
                 
                 SecureTextField(text: $password)
                 
@@ -44,14 +38,12 @@ struct SignUpView: View
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(.secondary)
                 
-                Button
-                {
+                Button {
                     print("Button")
                 }
                     label:
                 {
-                   ZStack
-                    {
+                   ZStack {
                         Text("Sign up")
                             .foregroundColor(.secondary)
                             .fontWeight(.semibold)
